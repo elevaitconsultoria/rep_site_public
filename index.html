@@ -437,10 +437,12 @@
       /* ícone tower: ~1.8× o bloco de texto — cresce acima de "MB MENDANHA" */
       height: clamp(96px, 15vw, 172px);
       width: auto; display: block; object-fit: contain; flex-shrink: 0;
+      margin-left: -34px; /* ← AJUSTE FINO: recua o ícone p/ compensar padding invisível esquerdo do PNG */
     }
     .hero-brand-text {
       display: flex; flex-direction: column;
       justify-content: flex-end; gap: 0;
+      margin-bottom: 10px; /* ← AJUSTE FINO: compensa padding inferior do PNG do ícone */
     }
     .hero-brand-name {
       font-family: 'Playfair Display', Georgia, serif;
