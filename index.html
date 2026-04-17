@@ -425,6 +425,59 @@
       letter-spacing: .08em; margin-top: .18em;
       font-weight: 500;
     }
+
+    /* ── HERO BRAND LOCKUP ─────────────────── */
+    .hero-brand {
+      display: flex; flex-direction: row;
+      align-items: flex-end;            /* base do ícone = base de "Sociedade de Advocacia" */
+      gap: clamp(14px, 2vw, 24px);
+      margin-bottom: var(--sp-7);
+    }
+    .hero-brand-img {
+      /* ícone tower: ~1.8× o bloco de texto — cresce acima de "MB MENDANHA" */
+      height: clamp(96px, 15vw, 172px);
+      width: auto; display: block; object-fit: contain; flex-shrink: 0;
+    }
+    .hero-brand-text {
+      display: flex; flex-direction: column;
+      justify-content: flex-end; gap: 0;
+    }
+    .hero-brand-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.85rem, 4vw, 3.3rem);
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--white);
+      margin: 0; padding: 0;
+      max-width: none;
+    }
+    .hero-brand-divider {
+      height: 1px; background: var(--gold);
+      width: 100%; margin: clamp(6px, .7vw, 10px) 0;
+      opacity: .9;
+    }
+    .hero-brand-sub {
+      font-size: clamp(.74rem, 1.65vw, 1.32rem);  /* ~40% do nome */
+      font-weight: 400;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+      line-height: 1;
+    }
+    @media (max-width: 820px) {
+      .hero-brand-img { height: 96px; }
+      .hero-brand-name { font-size: 1.75rem; letter-spacing: .05em; }
+      .hero-brand-sub { font-size: .7rem; letter-spacing: .38em; }
+    }
+    @media (max-width: 480px) {
+      .hero-brand { gap: 12px; }
+      .hero-brand-img { height: 76px; }
+      .hero-brand-name { font-size: 1.35rem; letter-spacing: .05em; }
+      .hero-brand-sub { font-size: .54rem; letter-spacing: .28em; }
+    }
+
     .hero-areas-tag {
       font-size: clamp(.68rem,.7vw + .28rem,.78rem);
       letter-spacing: .16em; text-transform: uppercase;
@@ -1214,18 +1267,28 @@
   /* ════════════════════════════════════════
      V2 – LOGO IMG
   ════════════════════════════════════════ */
-  .nav-logo { flex-direction: row; align-items: center; gap: 8px; }
+  .nav-logo { flex-direction: row; align-items: center; gap: 12px; }
   .nav-logo-img {
-    height: clamp(30px, 3.5vw, 38px);
-    width: auto;
-    display: block;
-    object-fit: contain;
-    flex-shrink: 0;
+    height: clamp(44px, 5.2vw, 58px);
+    width: auto; display: block; object-fit: contain; flex-shrink: 0;
   }
-  /* V3 – ênfase extra no nome do escritório na nav */
+  /* V3 – Logo redesign: nome em destaque, linha dourada, sub com tracking */
   .nav-logo-name {
-    font-size: clamp(1.05rem, 1.8vw, 1.28rem);
-    letter-spacing: .04em;
+    font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--white);
+  }
+  .nav-logo-divider {
+    height: 1px; background: var(--gold);
+    width: 100%; margin: 4px 0; opacity: .7;
+  }
+  .nav-logo-sub {
+    font-size: .5rem; font-weight: 400;
+    letter-spacing: .38em; text-transform: uppercase;
+    color: rgba(255,255,255,.6); margin-top: 0;
   }
 
   /* V3 – Sobre page: história com imagem ao lado */
@@ -1273,15 +1336,16 @@
     .sobre-hist-creds { flex: 1 1 100%; flex-direction: row; flex-wrap: wrap; gap: .875rem 1.5rem; }
   }
 
-  /* Texto em 2 linhas, altura combinada alinhada ao logo */
   .nav-logo-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
+    display: flex; flex-direction: column; justify-content: center; gap: 0;
   }
-  @media (max-width: 820px) { .nav-logo-img { height: 30px; } }
-  @media (max-width: 480px) { .nav-logo-img { height: 28px; } }
+  @media (max-width: 820px) { .nav-logo-img { height: 40px; } }
+  @media (max-width: 480px) {
+    .nav-logo-img { height: 36px; }
+    .nav-logo-name { font-size: 1.15rem; letter-spacing: .09em; }
+    .nav-logo-sub { display: none; }
+    .nav-logo-divider { display: none; }
+  }
 
   /* ════════════════════════════════════════
      V2 – AVALIAÇÕES GOOGLE
@@ -1562,6 +1626,7 @@
              decoding="async"/>
         <div class="nav-logo-text">
           <span class="nav-logo-name">MB Mendanha</span>
+          <div class="nav-logo-divider" aria-hidden="true"></div>
           <span class="nav-logo-sub">Sociedade de Advocacia</span>
         </div>
       </a>
@@ -1618,11 +1683,14 @@
       </svg>
       <div class="wrap">
         <div class="hero-body">
-          <div class="hero-eyebrow">
-            <div class="hero-eyebrow-line" aria-hidden="true"></div>
-            <span>MB Mendanha Sociedade de Advocacia</span>
+          <div class="hero-brand">
+            <img src="./assets/logo_mbmendanha.png" class="hero-brand-img" width="108" height="108" loading="eager" decoding="async" alt="MB Mendanha Sociedade de Advocacia"/>
+            <div class="hero-brand-text">
+              <h1 class="hero-brand-name">MB Mendanha</h1>
+              <div class="hero-brand-divider" aria-hidden="true"></div>
+              <span class="hero-brand-sub">Sociedade de Advocacia</span>
+            </div>
           </div>
-          <h1>MB Mendanha<em>Sociedade de Advocacia</em></h1>
           <p class="hero-areas-tag">Trabalhista · Família · Civil · Imobiliário · Saúde · Eclesiástico</p>
           <p class="hero-sub">Excelência jurídica e atendimento humanizado na defesa dos seus direitos.</p>
           <div class="btn-row">
