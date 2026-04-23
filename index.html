@@ -436,7 +436,7 @@
     .hero-logo-full {
       display: block;
       /* ← AJUSTE FINO largura: mín · fluido · máx */
-      width: clamp(260px, 38vw, 500px);
+      width: clamp(260px, 38vw, 450px);
       max-width: 100%;
       height: auto;
       /* ← AJUSTE FINO alinhamento esquerdo: compensa borda mínima do PNG */
@@ -1239,30 +1239,13 @@
   }
 
   /* ════════════════════════════════════════
-     V2 – LOGO IMG
+     V3 – LOGO ÚNICO (imagem completa)
   ════════════════════════════════════════ */
-  .nav-logo { flex-direction: row; align-items: center; gap: 12px; }
-  .nav-logo-img {
-    height: clamp(44px, 5.2vw, 58px);
-    width: auto; display: block; object-fit: contain; flex-shrink: 0;
-  }
-  /* V3 – Logo redesign: nome em destaque, linha dourada, sub com tracking */
-  .nav-logo-name {
-    font-size: clamp(1.25rem, 2.1vw, 1.6rem);
-    font-weight: 500;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    line-height: 1;
-    color: var(--white);
-  }
-  .nav-logo-divider {
-    height: 1px; background: var(--gold);
-    width: 100%; margin: 4px 0; opacity: .7;
-  }
-  .nav-logo-sub {
-    font-size: .5rem; font-weight: 400;
-    letter-spacing: .38em; text-transform: uppercase;
-    color: rgba(255,255,255,.6); margin-top: 0;
+  .nav-logo { align-items: center; }
+  .nav-logo-full-img {
+    /* altura proporcional ao nav — ajuste fino aqui */
+    height: clamp(36px, 4vw, 48px);
+    width: auto; display: block; object-fit: contain;
   }
 
   /* V3 – Sobre page: história com imagem ao lado */
@@ -1284,12 +1267,18 @@
     border-radius: var(--radius-l);
     overflow: hidden;
     box-shadow: var(--shadow-l);
+    position: relative; /* slideshow */
   }
-  .sobre-hist-img img {
+  /* ── SLIDESHOW FADE ──────────────────── */
+  .slide-img {
+    position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover; display: block;
-    min-height: 200px;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
   }
+  .slide-img.active { opacity: 1; }
+  .slide-img:first-child { position: relative; } /* mantém altura do container */
   /* Bloco de credenciais abaixo da imagem */
   .sobre-hist-creds {
     background: var(--navy);
@@ -1310,15 +1299,8 @@
     .sobre-hist-creds { flex: 1 1 100%; flex-direction: row; flex-wrap: wrap; gap: .875rem 1.5rem; }
   }
 
-  .nav-logo-text {
-    display: flex; flex-direction: column; justify-content: center; gap: 0;
-  }
-  @media (max-width: 820px) { .nav-logo-img { height: 40px; } }
   @media (max-width: 480px) {
-    .nav-logo-img { height: 36px; }
-    .nav-logo-name { font-size: 1.15rem; letter-spacing: .09em; }
-    .nav-logo-sub { display: none; }
-    .nav-logo-divider { display: none; }
+    .nav-logo-full-img { height: 32px; }
   }
 
   /* ════════════════════════════════════════
@@ -1591,19 +1573,6 @@
 <nav id="nav" role="navigation" aria-label="Navegação principal" aria-expanded="false">
   <div class="wrap">
     <div class="nav-i">
-      <a href="#" class="nav-logo" onclick="goto('home')" aria-label="MB Mendanha Sociedade de Advocacia – página inicial">
-        <img src="./assets/logo_mbmendanha.png"
-             alt="MB Mendanha Sociedade de Advocacia"
-             class="nav-logo-img"
-             width="48" height="48"
-             loading="eager"
-             decoding="async"/>
-        <div class="nav-logo-text">
-          <span class="nav-logo-name">MB Mendanha</span>
-          <div class="nav-logo-divider" aria-hidden="true"></div>
-          <span class="nav-logo-sub">Sociedade de Advocacia</span>
-        </div>
-      </a>
       <ul class="nav-links" role="list">
         <li><a href="#" onclick="goto('home')">Home</a></li>
         <li><a href="#" onclick="goto('sobre')">Sobre</a></li>
@@ -2128,8 +2097,11 @@
             <p>Acreditamos que o acesso à justiça começa com informação clara e responsável. Por isso, antes de qualquer decisão, nossa equipe se dedica a explicar com transparência o cenário, as possibilidades reais e as estratégias possíveis — sempre com seriedade, ética e sem promessas irreais.</p>
           </div>
           <div class="sobre-hist-right">
-            <div class="sobre-hist-img">
-              <img src="./assets/escritorio_01.jpg" alt="Escritório MB Mendanha Sociedade de Advocacia – Zona Norte de São Paulo" width="320" height="400" loading="lazy"/>
+            <div class="sobre-hist-img" id="sobre-slideshow">
+              <img src="./assets/escritorio_01.jpg"  class="slide-img active" alt="Escritório MB Mendanha – vista 1" width="320" height="400" loading="lazy"/>
+              <img src="./assets/escritorio_02.jpeg" class="slide-img"        alt="Escritório MB Mendanha – vista 2" width="320" height="400" loading="lazy"/>
+              <img src="./assets/escritorio_03.jpeg" class="slide-img"        alt="Escritório MB Mendanha – vista 3" width="320" height="400" loading="lazy"/>
+              <img src="./assets/escritorio_04.jpg"  class="slide-img"        alt="Escritório MB Mendanha – vista 4" width="320" height="400" loading="lazy"/>
             </div>
             <div class="sobre-hist-creds" aria-label="Credenciais do escritório">
               <div class="sobre-hist-cred-item">
@@ -2364,12 +2336,11 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <div style="margin-bottom:clamp(.75rem,2vw,1rem)">
-          <img src="./assets/logo_mbmendanha.png"
+          <img src="./assets/logo_principal_ajustado.png"
                alt="MB Mendanha Sociedade de Advocacia"
-               width="56" height="56"
                loading="lazy"
                decoding="async"
-               style="display:block;height:56px;width:auto;opacity:.92"/>
+               style="display:block;height:44px;width:auto;opacity:.88"/>
         </div>
         <p>Direito Civil, de Família e do Trabalho na Zona Norte de São Paulo. Atendimento presencial e online.</p>
         <div style="margin-top:1rem">
@@ -2751,6 +2722,20 @@ window.addEventListener('DOMContentLoaded', () => {
     gaEvent('time_on_page_30s', { event_category: 'engajamento', event_label: '30_segundos' });
   }, 30000);
 
+})();
+</script>
+
+<!-- ── SLIDESHOW SOBRE ─────────────────── -->
+<script>
+(function(){
+  var slides = document.querySelectorAll('#sobre-slideshow .slide-img');
+  if (!slides.length) return;
+  var current = 0;
+  setInterval(function(){
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 4000); /* ← AJUSTE FINO: intervalo em ms entre slides (4000 = 4s) */
 })();
 </script>
 </body>
