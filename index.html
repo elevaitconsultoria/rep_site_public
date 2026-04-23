@@ -1251,16 +1251,29 @@
   /* V3 – Sobre page: história com imagem ao lado */
   .sobre-hist-grid {
     display: grid;
-    grid-template-columns: 1fr minmax(380px, 46%); /* ← coluna da imagem mais larga */
-    gap: clamp(2rem, 4vw, 3rem);
+    grid-template-columns: minmax(400px, 58%) 1fr; /* imagem à esquerda, dominante */
+    gap: clamp(2rem, 4vw, 3.5rem);
     align-items: stretch;
     margin-top: var(--sp-8);
   }
-  @media (max-width: 820px) { .sobre-hist-grid { grid-template-columns: 1fr; } }
-  /* Coluna direita: imagem + credenciais empilhadas */
+  @media (max-width: 900px) { .sobre-hist-grid { grid-template-columns: 1fr; } }
+  /* Coluna direita: texto + credenciais */
   .sobre-hist-right {
     display: flex; flex-direction: column;
-    gap: clamp(.875rem, 2vw, 1.25rem);
+    justify-content: center;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  /* Credenciais em grade 2×2 */
+  .sobre-hist-creds {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: .875rem 1.25rem;
+  }
+  @media (max-width: 900px) {
+    .sobre-hist-creds { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .sobre-hist-creds { grid-template-columns: 1fr; }
   }
   .sobre-hist-img {
     flex: 1;
@@ -1286,12 +1299,11 @@
     position: relative;
     min-height: inherit;
   }
-  /* Bloco de credenciais abaixo da imagem */
+  /* Credenciais */
   .sobre-hist-creds {
     background: var(--navy);
     border-radius: var(--radius-m);
-    padding: clamp(1rem,2.5vw,1.25rem) clamp(1rem,2.5vw,1.5rem);
-    display: flex; flex-direction: column; gap: .7rem;
+    padding: clamp(.875rem,2vw,1.25rem);
   }
   .sobre-hist-cred-item {
     display: flex; align-items: center; gap: .65rem;
@@ -2098,37 +2110,48 @@
         <h2>Justiça acessível e informação clara</h2>
         <div class="gold-rule"></div>
         <div class="sobre-hist-grid">
-          <div class="sobre-long lead">
-            <p>A <strong>MB Mendanha Sociedade de Advocacia</strong> foi constituída com o propósito de oferecer orientação jurídica de qualidade, por meio de uma equipe preparada e comprometida, atuando em seis frentes do Direito: <strong>Trabalhista, Família e Sucessões, Civil, Imobiliário, Saúde e Eclesiástico</strong>, com forte presença na Zona Norte de São Paulo.</p>
-            <p>Com sede na Zona Norte, realizamos atendimentos presenciais em São Paulo e também de forma online para clientes em todo o Brasil, mantendo o mesmo padrão de qualidade, atenção e dedicação em cada caso.</p>
-            <p>Acreditamos que o acesso à justiça começa com informação clara e responsável. Por isso, antes de qualquer decisão, nossa equipe se dedica a explicar com transparência o cenário, as possibilidades reais e as estratégias possíveis — sempre com seriedade, ética e sem promessas irreais.</p>
+
+          <!-- COLUNA ESQUERDA: slideshow dominante -->
+          <div class="sobre-hist-img" id="sobre-slideshow">
+            <img src="./assets/escritorio_01.jpg"  class="slide-img active" alt="Escritório MB Mendanha – recepção" width="600" height="480" loading="lazy"/>
+            <img src="./assets/escritorio_02.jpeg" class="slide-img"        alt="Escritório MB Mendanha – sala de reunião" width="600" height="480" loading="lazy"/>
+            <img src="./assets/escritorio_03.jpeg" class="slide-img"        alt="Escritório MB Mendanha – ambiente de trabalho" width="600" height="480" loading="lazy"/>
           </div>
+
+          <!-- COLUNA DIREITA: texto convidativo + credenciais -->
           <div class="sobre-hist-right">
-            <div class="sobre-hist-img" id="sobre-slideshow">
-              <img src="./assets/escritorio_01.jpg"  class="slide-img active" alt="Escritório MB Mendanha – vista 1" width="320" height="400" loading="lazy"/>
-              <img src="./assets/escritorio_02.jpeg" class="slide-img"        alt="Escritório MB Mendanha – vista 2" width="320" height="400" loading="lazy"/>
-              <img src="./assets/escritorio_03.jpeg" class="slide-img"        alt="Escritório MB Mendanha – vista 3" width="320" height="400" loading="lazy"/>
-              <img src="./assets/escritorio_04.jpg"  class="slide-img"        alt="Escritório MB Mendanha – vista 4" width="320" height="400" loading="lazy"/>
+            <div>
+              <p class="lead" style="font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.75;color:var(--navy-mid)">
+                Nosso escritório nasceu da crença de que cada pessoa merece ser ouvida com atenção e orientada com honestidade. Venha nos conhecer — presencialmente na Zona Norte de São Paulo ou online, de qualquer lugar do Brasil.
+              </p>
+              <p style="margin-top:1rem;font-size:.93rem;line-height:1.7;color:var(--muted)">
+                Atuamos em seis frentes do Direito — <strong>Trabalhista, Família e Sucessões, Civil, Imobiliário, Saúde e Eclesiástico</strong> — com a mesma dedicação e ética em cada caso.
+              </p>
             </div>
             <div class="sobre-hist-creds" aria-label="Credenciais do escritório">
               <div class="sobre-hist-cred-item">
                 <svg class="ico" width="17" height="17"><use href="#icon-scale"/></svg>
-                <div><strong>Registro profissional</strong>OAB/SP 53.272</div>
+                <div><strong>OAB/SP 53.272</strong>Registro profissional</div>
               </div>
               <div class="sobre-hist-cred-item">
                 <svg class="ico" width="17" height="17"><use href="#icon-clock"/></svg>
-                <div><strong>Experiência</strong>Mais de 10 anos defendendo direitos</div>
+                <div><strong>+10 anos</strong>Defendendo direitos</div>
               </div>
               <div class="sobre-hist-cred-item">
                 <svg class="ico" width="17" height="17"><use href="#icon-pin"/></svg>
-                <div><strong>Localização</strong>Zona Norte de São Paulo</div>
+                <div><strong>Zona Norte</strong>São Paulo – SP</div>
               </div>
               <div class="sobre-hist-cred-item">
                 <svg class="ico" width="17" height="17"><use href="#icon-globe"/></svg>
-                <div><strong>Atendimento online</strong>Para todo o Brasil</div>
+                <div><strong>Online</strong>Para todo o Brasil</div>
               </div>
             </div>
+            <a href="https://wa.me/5511965030211?text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20o%20escritório%20MB%20Mendanha."
+               class="btn btn-gold" target="_blank" rel="noopener" style="align-self:flex-start">
+              Agendar uma visita
+            </a>
           </div>
+
         </div>
       </div>
     </section>
