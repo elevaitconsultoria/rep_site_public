@@ -1275,6 +1275,7 @@
     margin-bottom: var(--sp-8);
   }
   /* ── SLIDESHOW FADE ──────────────────── */
+  /* ── SLIDESHOW: todas as slides são absolute, container define altura via aspect-ratio */
   .slide-img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -1283,7 +1284,7 @@
     transition: opacity 1.2s ease-in-out;
   }
   .slide-img.active { opacity: 1; }
-  .slide-img:first-child { position: relative; aspect-ratio: 3/2; }
+
   /* 3. Faixa de credenciais horizontal */
   .sobre-hist-creds {
     display: grid;
@@ -1297,22 +1298,26 @@
   .sobre-hist-cred-item {
     display: flex; flex-direction: column;
     align-items: center; text-align: center;
-    gap: .3rem; padding: 1.25rem 1rem;
+    gap: .25rem; padding: 1rem .75rem;
     background: var(--navy);
-    font-size: .82rem; color: rgba(255,255,255,.72);
+    font-size: .78rem; color: rgba(255,255,255,.72);
     line-height: 1.3;
   }
-  .sobre-hist-cred-item .ico { color: var(--gold); margin-bottom: .2rem; }
+  .sobre-hist-cred-item .ico { color: var(--gold); margin-bottom: .1rem; }
   .sobre-hist-cred-item strong {
     color: var(--white); display: block;
-    font-size: .9rem; margin-bottom: 2px;
+    font-size: .82rem; margin-bottom: 1px;
   }
-  @media (max-width: 640px) {
+  /* mobile/tablet: 2 colunas, células menores */
+  @media (max-width: 768px) {
     .sobre-hist-creds { grid-template-columns: repeat(2, 1fr); }
+    .sobre-hist-cred-item { padding: .75rem .5rem; font-size: .72rem; }
+    .sobre-hist-cred-item strong { font-size: .76rem; }
     .sobre-hist-img { aspect-ratio: 4/3; }
   }
-  @media (max-width: 380px) {
-    .sobre-hist-creds { grid-template-columns: 1fr; }
+  @media (max-width: 400px) {
+    .sobre-hist-creds { grid-template-columns: 1fr 1fr; }
+    .sobre-hist-cred-item { padding: .6rem .4rem; font-size: .68rem; }
   }
 
   @media (max-width: 480px) {
