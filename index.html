@@ -377,27 +377,27 @@
       background-color: #030810;
       background-image: url('./assets/hero-bg.png');
       background-size: cover;
-      background-position: 68% 30%;
+      background-position: center center;
       background-repeat: no-repeat;
       display: flex; align-items: center;
       padding: max(100px, 16vh) 0 var(--sp-24);
       position: relative; overflow: hidden;
     }
     @media (max-width: 680px) {
-      #hero { background-position: 72% center; }
+      #hero { background-position: 60% center; }
     }
-    /* Overlay máximo contraste — fundo quase sólido */
+    /* Overlay lateral — escurece apenas o lado esquerdo (texto), libera a foto à direita */
     .hero-bg {
       position: absolute; inset: 0; pointer-events: none;
       background:
         linear-gradient(
-          105deg,
-          rgba(2,5,12,.99)   0%,
-          rgba(3,8,20,.98)  38%,
-          rgba(3,8,20,.92)  65%,
-          rgba(2,5,12,.96)  100%
-        ),
-        radial-gradient(ellipse 40% 60% at 78% 50%, rgba(201,161,74,.05) 0%, transparent 50%);
+          to right,
+          rgba(2,5,12,.94)  0%,
+          rgba(2,5,12,.88)  30%,
+          rgba(2,5,12,.55)  55%,
+          rgba(2,5,12,.10)  80%,
+          rgba(2,5,12,.00) 100%
+        );
     }
     /* Rings decorativos */
     .hero-rings {
